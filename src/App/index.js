@@ -1,7 +1,12 @@
-import Counter from "./Components/Counter";
+import { CssBaseline, ThemeProvider } from "@mui/material";
+import Header from "../Components/Header";
+import theme from "./theme";
 
-function App() {
-  return <Counter startValue={1} step={2} />;
+export default function App() {
+  return (
+    <ThemeProvider theme={theme}>
+      <CssBaseline />
+      <Header />
+    </ThemeProvider>
+  );
 }
-
-export default App;
