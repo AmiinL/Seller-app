@@ -1,16 +1,24 @@
+import { useCounter } from "react-use";
 import React from "react";
 
-export default function Counter({ startValue = 0, stepper = 1 }) {
-  const [currentValue, setNextValue] = React.useState(startValue);
+export default function Counter({ startValue = 0, step = 1 }) {
+  const [currentValue, { dec, inc }] = useCounter(startValue, null, startValue);
   return (
     <>
       <p>{currentValue}</p>
       <button
         onClick={() => {
-          setNextValue(currentValue + stepper);
+          inc(step);
         }}
       >
-        Click Me
+        +{step}
+      </button>
+      <button
+        onClick={() => {
+          dec(step);
+        }}
+      >
+        -{step}
       </button>
     </>
   );
