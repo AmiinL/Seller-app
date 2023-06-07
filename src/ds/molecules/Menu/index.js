@@ -7,7 +7,7 @@ export default function Menu({ items }) {
       <MenuList>
         {items.map(({ name, route }) => (
           <li key={route}>
-            <Link href={route}>{name}</Link>
+            <Link to={route}>{name}</Link>
           </li>
         ))}
       </MenuList>
