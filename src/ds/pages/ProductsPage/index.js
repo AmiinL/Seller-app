@@ -1,6 +1,7 @@
 import { DataGrid } from "@mui/x-data-grid";
 import { ConditionProductChip, Price, ProductImage } from "../../atoms";
-
+import { Box } from "@mui/system";
+import { useProducts } from "../../../hooks";
 const columns = [
   {
     field: "imageUrl",
@@ -29,31 +30,16 @@ const columns = [
   },
 ];
 
-const rows = [
-  {
-    id: "1209c3dc-c9df-4346-8ede-ff012400254b",
-    name: "Intelligent Granit Poulet",
-    imageUrl: "https://picsum.photos/seed/dYPXbc7r/640/640",
-    price: 90.54,
-    condition: "used",
-    stock: 4,
-  },
-  {
-    id: "27d5f371-d6e9-4d63-b7f4-7561cc1694b5",
-    name: "Incroyable Frais Lard",
-    imageUrl: "https://picsum.photos/seed/YP5l0q/640/640",
-    price: 78.97,
-    condition: "new",
-    stock: 9,
-  },
-];
-
 export default function ProductsPage() {
+  const { isLoading, products } = useProducts();
   return (
-    <DataGrid
-      columns={columns}
-      rows={rows}
-      disableRowSelectionOnClick
-    ></DataGrid>
+    <Box style={{ width: "100%", height: 400 }}>
+      <DataGrid
+        loading={isLoading}
+        columns={columns}
+        rows={products || []}
+        disableRowSelectionOnClick
+      ></DataGrid>
+    </Box>
   );
 }
