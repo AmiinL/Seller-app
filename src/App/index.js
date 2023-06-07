@@ -1,21 +1,30 @@
 import { CssBaseline, ThemeProvider } from "@mui/material";
-import { Header, Menu } from "../ds/molecules";
-import theme from "./theme";
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
 
-const items = [
-  { name: "Produits", route: "/products" },
-  { name: "Commandes", route: "/products" },
-  { name: "Rapports", route: "/products" },
-  { name: "Finances", route: "/Finances" },
-  { name: "Messages", route: "/Messages" },
-];
+import theme from "./theme";
+import { Layout } from "../ds/templates";
+import { CommandesPage, ErrorPage, ProductsPage } from "../ds/pages";
+
+const router = createBrowserRouter([
+  {
+    path: "/",
+    element: <Layout />,
+    errorElement: <ErrorPage />,
+    children: [
+      { index: true, element: <ProductsPage /> },
+      {
+        path: "commandes",
+        element: <CommandesPage />,
+      },
+    ],
+  },
+]);
+
 export default function App() {
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
-      <Header title="SellerApp" caption="Bienvenu Mr" />
-      <Menu items={items} />
-      Main
+      <RouterProvider router={router} />
     </ThemeProvider>
   );
 }
